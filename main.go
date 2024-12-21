@@ -7,9 +7,9 @@ import (
 	"time"
 )
 
-func checkStatus(domain string, port string) string {
+func checkStatus(domain string, port string, timer int) string {
 	address := domain + ":" + port
-	timeout := time.Duration(5 * time.Second)
+	timeout := time.Duration(timer) * time.Second
 	conn, err := net.DialTimeout("tcp", address, timeout)
 	var status string
 
@@ -28,9 +28,10 @@ func checkStatus(domain string, port string) string {
 func main() {
 	domain := flag.String("domain", "example.com", "Domain to scan")
 	port := flag.String("port", "80", "Port to scan")
+	timer := flag.Int("timer", 5, "timer in seconds")
 	flag.Parse()
 
-	fmt.Printf("Scanning %s on port %s\n", *domain, *port)
-	fmt.Printf(checkStatus(*domain, *port))
+	fmt.Printf("Scanning %s on port %s with a timer of %d\n", *domain, *port, *timer)
+	fmt.Printf(checkStatus(*domain, *port, *timer))
 
 }
