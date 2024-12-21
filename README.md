@@ -1,3 +1,13 @@
+#### Help
+```
+go run main.go --help                      
+  -domain string
+    	Domain to scan (default "example.com")
+  -port string
+    	Port to scan (default "80")
+  -timer int
+    	timer in seconds (default 5)
+```
 #### Quick test
 ```
 go run main.go -domain google.com -timer 10
